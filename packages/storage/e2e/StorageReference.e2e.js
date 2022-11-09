@@ -677,4 +677,24 @@ describe('storage() -> StorageReference', function () {
       });
     });
   });
+
+  describe('put secondaryApp', function () {
+    it('allows valid metadata properties for upload', async function () {
+      const storageReference = firebase
+        .storage(firebase.app('secondaryFromNative'))
+        // .storage()
+        .ref(`${PATH}/metadataTest.jpeg`);
+      await storageReference.put(new jet.context.window.ArrayBuffer(), {
+        contentType: 'image/jpg',
+        md5hash: '123412341234',
+        cacheControl: 'true',
+        contentDisposition: 'disposed',
+        contentEncoding: 'application/octet-stream',
+        contentLanguage: 'de',
+        customMetadata: {
+          customMetadata1: 'metadata1value',
+        },
+      });
+    });
+  });
 });
