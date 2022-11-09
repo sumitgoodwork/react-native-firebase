@@ -142,8 +142,7 @@ describe('storage() -> StorageReference', function () {
   describe('getDownloadURL', function () {
     it('should return a download url for a file', async function () {
       // This is frequently flaky in CI - but works sometimes. Skipping only in CI for now.
-      // Disabled for iOS pending: https://github.com/firebase/firebase-ios-sdk/pull/10370
-      if (!isCI && device.getPlatform() !== 'ios') {
+      if (!isCI) {
         const storageReference = firebase.storage().ref(`${PATH}/list/file1.txt`);
         const downloadUrl = await storageReference.getDownloadURL();
         downloadUrl.should.be.a.String();
